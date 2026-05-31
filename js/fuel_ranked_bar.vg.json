@@ -6,8 +6,8 @@
     "subtitleColor": "#8a8f9e", "subtitleFontSize": 12,
     "fontSize": 14, "anchor": "start", "color": "#0f1117"
   },
-  "width": 300,
-  "height": 200,
+  "width": 340,
+  "height": 280,
   "data": {
     "url": "data/fuel_prices_state.csv",
     "format": { "type": "csv", "parse": { "Price": "number" } }
@@ -19,12 +19,18 @@
         "x": {
           "field": "State", "type": "nominal",
           "sort": { "field": "Price", "order": "descending" },
-          "axis": { "labelAngle": 0, "title": "State / Territory", "labelFontSize": 11 }
+          "axis": {
+            "labelAngle": 0,
+            "title": "State / Territory",
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "titlePadding": 8
+          }
         },
         "y": {
           "field": "Price", "type": "quantitative",
           "title": "Fuel Price (c/L)",
-          "scale": { "domain": [175, 215] },
+          "scale": { "zero": false, "domain": [175, 216] },
           "axis": { "labelFontSize": 10, "titleFontSize": 11 }
         },
         "color": {
@@ -45,8 +51,20 @@
       }
     },
     {
-      "mark": { "type": "text", "align": "left", "dx": 4, "dy": -60, "fontSize": 10, "color": "#8a8f9e", "fontStyle": "italic" },
-      "encoding": { "text": { "value": "← avg" } }
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": 165,
+        "dy": -4,
+        "fontSize": 10,
+        "color": "#8a8f9e",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "y": { "aggregate": "mean", "field": "Price", "type": "quantitative" },
+        "text": { "value": "← avg" }
+      }
     }
   ],
   "config": { "view": { "stroke": null }, "axis": { "grid": false } }
