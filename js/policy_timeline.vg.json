@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 750,
+  "height": 450,
+  "title": "Policy Response Timeline (Fuel + Cost of Living)",
+  "data": {
+    "url": "data/state_policy.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Date": "date",
+        "ImpactLevel": "number"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "title": "Timeline"
+        },
+        "y": {
+          "field": "ImpactLevel",
+          "type": "quantitative",
+          "title": "Policy Impact Level"
+        },
+        "size": {
+          "field": "ImpactLevel",
+          "type": "quantitative",
+          "scale": { "range": [80, 700] }
+        },
+        "color": {
+          "field": "Type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Policy", "External Shock"],
+            "range": ["#ef4444", "#3b82f6"]
+          },
+          "legend": { "title": "Event Type" }
+        },
+        "tooltip": [
+          { "field": "Event", "type": "nominal" },
+          { "field": "State", "type": "nominal" },
+          { "field": "Type", "type": "nominal" },
+          { "field": "ImpactLevel", "type": "quantitative" },
+          { "field": "Date", "type": "temporal" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": { "field": "Date", "type": "temporal" },
+        "y": { "field": "ImpactLevel", "type": "quantitative" },
+        "text": { "field": "Event" },
+        "color": { "value": "#111827" }
+      }
+    }
+  ]
+}

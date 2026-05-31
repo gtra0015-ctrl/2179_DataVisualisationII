@@ -1,0 +1,23 @@
+Event,Date,Type,State,ImpactLevel,lon,lat
+Fuel supply monitoring strengthened,2023-01-01,Policy,VIC,2,144.9631,-37.8136
+Fuel price transparency expanded,2024-01-01,Policy,VIC,3,144.9631,-37.8136
+Fair Fuel Plan (price caps),2025-01-01,Policy,VIC,5,144.9631,-37.8136
+Public transport relief announced,2026-03-29,Policy,VIC,5,144.9631,-37.8136
+
+NSW fuel transparency rollout,2024-06-01,Policy,NSW,4,151.2093,-33.8688
+NSW cost-of-living fuel monitoring,2025-02-01,Policy,NSW,3,151.2093,-33.8688
+
+QLD fuel price reporting system,2024-03-01,Policy,QLD,4,153.0251,-27.4698
+QLD transport subsidy expansion,2025-07-01,Policy,QLD,4,153.0251,-27.4698
+
+WA petrol price cycle regulation,2023-08-01,Policy,WA,5,115.8605,-31.9505
+WA fuel monitoring upgrade,2024-11-01,Policy,WA,3,115.8605,-31.9505
+
+SA fuel price tracking system,2024-05-01,Policy,SA,3,138.6007,-34.9285
+SA transport cost relief,2025-06-01,Policy,SA,4,138.6007,-34.9285
+
+TAS fuel subsidy support,2024-09-01,Policy,TAS,3,147.3272,-42.8821
+
+NA fuel price assistance scheme,2025-01-01,Policy,NT,4,130.8456,-12.4634
+
+ACT transport affordability program,2025-03-01,Policy,ACT,5,149.1300,-35.2809

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": {
+    "text": "Policy Intensity by State",
+    "subtitle": "Small multiples reveal differences in government response across Australia"
+  },
+
+  "data": {
+    "url": "data/policy_intensity.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "number",
+        "ImpactLevel": "number"
+      }
+    }
+  },
+
+  "facet": {
+    "field": "State",
+    "type": "nominal",
+    "columns": 4
+  },
+
+  "spec": {
+    "width": 160,
+    "height": 120,
+
+    "mark": {
+      "type": "line",
+      "point": true,
+      "strokeWidth": 3
+    },
+
+    "encoding": {
+      "x": {
+        "field": "Year",
+        "type": "ordinal"
+      },
+
+      "y": {
+        "field": "ImpactLevel",
+        "type": "quantitative",
+        "scale": {
+          "domain": [0,5]
+        },
+        "title": "Policy Intensity"
+      },
+
+      "color": {
+        "field": "PolicyType",
+        "type": "nominal",
+        "legend": {
+          "title": "Policy Type"
+        }
+      },
+
+      "tooltip": [
+        {"field":"State"},
+        {"field":"Year"},
+        {"field":"PolicyType"},
+        {"field":"ImpactLevel"}
+      ]
+    }
+  },
+
+  "config": {
+    "view": {
+      "stroke": "#dddddd"
+    }
+  }
+}

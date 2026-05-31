@@ -1,0 +1,32 @@
+State,Year,ImpactLevel,PolicyType
+VIC,2023,2,Fuel Supply Monitoring
+VIC,2024,3,Price Transparency
+VIC,2025,5,Fair Fuel Plan
+VIC,2026,5,Free Public Transport
+
+QLD,2024,5,50c Public Transport Fares
+QLD,2025,5,50c Public Transport Fares
+QLD,2026,5,50c Public Transport Fares
+
+NSW,2023,3,FuelCheck Expansion
+NSW,2024,3,Fuel Transparency
+NSW,2025,4,Cost of Living Transport Relief
+
+WA,2023,4,FuelWatch Program
+WA,2024,4,FuelWatch Program
+WA,2025,4,FuelWatch Program
+
+SA,2024,2,Fuel Transparency Measures
+SA,2025,2,Fuel Transparency Measures
+
+ACT,2024,3,Transport Subsidies
+ACT,2025,3,Transport Subsidies
+
+NT,2024,2,Regional Fuel Support
+NT,2025,2,Regional Fuel Support
+
+Federal,2022,5,Fuel Excise Reduction
+Federal,2023,4,Fuel Security Strategy
+Federal,2024,3,Energy Market Monitoring
+Federal,2025,3,Energy Market Monitoring
+Federal,2026,3,Energy Market Monitoring

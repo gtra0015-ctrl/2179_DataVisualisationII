@@ -21,7 +21,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   vegaEmbed("#fuel_ranked_bar", "js/fuel_ranked_bar.vg.json", {
+    actions: false
+  }).catch(console.error);
+
+  vegaEmbed("#policy_timeline", "js/policy_timeline.vg.json", {
   actions: false
   }).catch(console.error);
+
+  vegaEmbed("#policy_map", "js/policy_map.vg.json", {
+  actions: false
+  }).catch(console.error);
+
+  vegaEmbed("#policy_bar", "js/policy_spending.vg.json", { actions: false })
+    .catch(console.error);
+
+  vegaEmbed(
+  "#policy_trellis",
+  "js/policy_intensity.vg.json",
+  { actions: false }
+  ).catch(console.error);
 
 });

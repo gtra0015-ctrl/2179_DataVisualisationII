@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": {
+    "text": "Government Policy Spending by State",
+    "subtitle": "Logarithmic scale reveals spending differences across Australian jurisdictions"
+  },
+
+  "width": 700,
+  "height": 450,
+
+  "data": {
+    "url": "data/policy_spending.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 3,
+    "cornerRadiusTopRight": 3
+  },
+
+  "encoding": {
+    "x": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State / Territory",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+
+    "xOffset": {
+      "field": "Dedication",
+      "type": "nominal"
+    },
+
+    "y": {
+      "field": "Amount",
+      "type": "quantitative",
+      "title": "Policy Spending (AUD)",
+      "axis": {
+        "format": "~s",
+        "grid": true
+      }
+    },
+
+    "color": {
+      "field": "Dedication",
+      "type": "nominal",
+      "title": "Program Classification",
+      "scale": {
+        "domain": [
+          "Wholly",
+          "Primarily",
+          "Partly"
+        ],
+        "range": [
+          "#2563eb",
+          "#10b981",
+          "#f59e0b"
+        ]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal"
+      },
+      {
+        "field": "Dedication",
+        "type": "nominal"
+      },
+      {
+        "field": "Amount",
+        "type": "quantitative",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "gridColor": "#e5e7eb"
+    },
+
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "orient": "top"
+    },
+
+    "title": {
+      "fontSize": 18,
+      "subtitleFontSize": 12
+    }
+  }
+}
