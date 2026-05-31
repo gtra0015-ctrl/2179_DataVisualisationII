@@ -17,12 +17,15 @@
   {
     "lookup": "properties.STATE_NAME",
     "from": {
-        "data": {
-            "url": "js/fuel_price_state.json"
+      "data": {
+        "url": "data/fuel_prices_state.csv",
+        "format": { "type": "csv" }
+      },
+      "key": "State",
+      "fields": ["Price"]
         }
     }
-  }
-],
+    ],
 
   "projection": {
     "type": "mercator"
