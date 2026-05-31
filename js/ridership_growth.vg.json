@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": "Ridership Growth Across Major Transport Modes",
+
+  "width": 750,
+  "height": 400,
+
+  "data": {
+    "url": "data/vic_transport_patronage.csv"
+  },
+
+  "transform": [
+  {
+    "filter": {
+      "field": "Month",
+      "oneOf": [
+        "January",
+        "March",
+        "May",
+        "October"
+      ]
+    }
+  }
+],
+
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 80
+    },
+    "strokeWidth": 3
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "sort": [
+        "January",
+        "March",
+        "May",
+        "October"
+      ]
+    },
+
+    "y": {
+      "field": "Passengers",
+      "type": "quantitative",
+      "title": "Passengers"
+    },
+
+    "color": {
+      "field": "Mode",
+      "type": "nominal",
+      "title": "Transport Mode"
+    },
+
+    "tooltip": [
+      {"field": "Mode"},
+      {"field": "Month"},
+      {
+        "field": "Passengers",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

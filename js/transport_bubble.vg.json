@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": "Passenger Volume by Transport Mode (2025)",
+
+  "width": 750,
+  "height": 450,
+
+  "data": {
+    "url": "data/transport_mode_totals.csv"
+  },
+
+  "mark": {
+    "type": "circle",
+    "opacity": 0.75
+  },
+
+  "encoding": {
+
+    "x": {
+      "field": "Mode",
+      "type": "nominal",
+      "title": "Transport Mode",
+      "sort": "-y"
+    },
+
+    "y": {
+      "field": "Passengers",
+      "type": "quantitative",
+      "title": "Total Passengers"
+    },
+
+    "size": {
+      "field": "Passengers",
+      "type": "quantitative",
+      "title": "Passenger Volume",
+      "scale": {
+        "range": [300, 8000]
+      }
+    },
+
+    "color": {
+      "field": "Mode",
+      "type": "nominal",
+      "legend": null
+    },
+
+    "tooltip": [
+      {"field": "Mode"},
+      {
+        "field": "Passengers",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

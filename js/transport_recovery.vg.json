@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": "Public Transport Patronage by Mode (2025)",
+
+  "data": {
+    "url": "data/transport_patronage_long.csv"
+  },
+
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "sort": [
+        "January","February","March","April",
+        "May","June","July","August",
+        "September","October","November","December"
+      ]
+    },
+
+    "y": {
+      "field": "Passengers",
+      "type": "quantitative"
+    },
+
+    "color": {
+      "field": "Mode",
+      "type": "nominal"
+    }
+  }
+}

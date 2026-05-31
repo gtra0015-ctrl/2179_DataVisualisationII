@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "title": "Monthly Public Transport Composition",
+
+  "data": {
+    "url": "data/transport_patronage_long.csv"
+  },
+
+  "mark": "area",
+
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "sort": [
+        "January","February","March","April",
+        "May","June","July","August",
+        "September","October","November","December"
+      ]
+    },
+
+    "y": {
+      "field": "Passengers",
+      "type": "quantitative",
+      "stack": "zero"
+    },
+
+    "color": {
+      "field": "Mode",
+      "type": "nominal"
+    }
+  }
+}

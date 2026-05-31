@@ -41,4 +41,26 @@ document.addEventListener("DOMContentLoaded", function () {
   { actions: false }
   ).catch(console.error);
 
+  vegaEmbed("#pt_multiline", "js/transport_recovery.vg.json", {
+  actions: false
+  }).catch(console.error);
+
+  vegaEmbed(
+  "#pt_area",
+  "js/transport_composition.vg.json",
+  { actions: false }
+  ).catch(console.error);
+
+  vegaEmbed(
+  "#pt_slope",
+  "js/ridership_growth.vg.json",
+  { actions: false }
+  ).catch(console.error);
+
+  vegaEmbed(
+  "#pt_bubble",
+  "js/transport_bubble.vg.json",
+  { actions: false }
+  ).catch(console.error);
+
 });
