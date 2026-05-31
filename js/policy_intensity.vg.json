@@ -1,10 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
 
-  "title": {
-    "text": "Policy Intensity by State",
-    "subtitle": "Small multiples reveal differences in government response across Australia"
-  },
+  "title": "Policy Intensity Across Australian States",
+
+  "width": 700,
+  "height": 400,
 
   "data": {
     "url": "data/policy_intensity.csv",
@@ -17,57 +17,39 @@
     }
   },
 
-  "facet": {
-    "field": "State",
-    "type": "nominal",
-    "columns": 4
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
   },
 
-  "spec": {
-    "width": 160,
-    "height": 120,
-
-    "mark": {
-      "type": "line",
-      "point": true,
-      "strokeWidth": 3
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year"
     },
 
-    "encoding": {
-      "x": {
-        "field": "Year",
-        "type": "ordinal"
-      },
+    "y": {
+      "field": "ImpactLevel",
+      "type": "quantitative",
+      "title": "Policy Intensity",
+      "scale": {
+        "domain": [0, 5]
+      }
+    },
 
-      "y": {
-        "field": "ImpactLevel",
-        "type": "quantitative",
-        "scale": {
-          "domain": [0,5]
-        },
-        "title": "Policy Intensity"
-      },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
 
-      "color": {
-        "field": "PolicyType",
-        "type": "nominal",
-        "legend": {
-          "title": "Policy Type"
-        }
-      },
-
-      "tooltip": [
-        {"field":"State"},
-        {"field":"Year"},
-        {"field":"PolicyType"},
-        {"field":"ImpactLevel"}
-      ]
-    }
-  },
-
-  "config": {
-    "view": {
-      "stroke": "#dddddd"
-    }
+    "tooltip": [
+      {"field": "State"},
+      {"field": "PolicyType"},
+      {"field": "Year"},
+      {"field": "ImpactLevel"}
+    ]
   }
 }
