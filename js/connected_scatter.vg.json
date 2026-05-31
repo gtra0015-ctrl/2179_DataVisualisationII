@@ -7,12 +7,12 @@
     "fontSize": 14, "anchor": "start", "color": "#0f1117"
   },
   "width": 640,
-  "height": 340,
+  "height": 300,
   "data": { "url": "data/fuel_vs_ridership.csv" },
   "resolve": { "scale": { "y": "independent" } },
   "layer": [
     {
-      "mark": { "type": "bar", "color": "#c0392b", "opacity": 0.75, "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3 },
+      "mark": { "type": "bar", "color": "#c0392b", "opacity": 0.7, "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3 },
       "encoding": {
         "x": {
           "field": "Month", "type": "ordinal",
@@ -23,7 +23,7 @@
         "y": {
           "field": "FuelPrice", "type": "quantitative",
           "title": "Fuel Price (c/L)",
-          "scale": { "domain": [170, 195] },
+          "scale": { "zero": true, "domain": [0, 200] },
           "axis": { "titleColor": "#c0392b", "labelColor": "#c0392b", "labelFontSize": 11, "titleFontSize": 12, "grid": false }
         },
         "tooltip": [
