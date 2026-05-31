@@ -1,31 +1,29 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "width": 700,
   "height": 500,
-
-  "title": "Average Petrol Price by State (cents per litre)",
+  "title": "Average Petrol Price by State (c/L)",
 
   "data": {
-    "url": "map/australian-states.json",
+    "url": "data/states.json",
     "format": {
       "type": "json"
     }
   },
 
   "transform": [
-  {
-    "lookup": "properties.STATE_NAME",
-    "from": {
-      "data": {
-        "url": "data/fuel_prices_state.csv",
-        "format": { "type": "csv" }
-      },
-      "key": "State",
-      "fields": ["Price"]
-        }
+    {
+      "lookup": "STATE_NAME",
+      "from": {
+        "data": {
+          "url": "data/fuel_prices_state.csv"
+        },
+        "key": "State",
+        "fields": ["Price"]
+      }
     }
-    ],
+  ],
 
   "projection": {
     "type": "mercator"
@@ -45,14 +43,8 @@
       }
     },
     "tooltip": [
-      {
-        "field": "properties.STATE_NAME",
-        "title": "State"
-      },
-      {
-        "field": "Price",
-        "title": "Price (c/L)"
-      }
+      { "field": "STATE_NAME", "type": "nominal", "title": "State" },
+      { "field": "Price", "type": "quantitative" }
     ]
   }
 }
