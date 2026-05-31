@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Fuel Price Australia</title>
+  <title>DV2 Transport Visualisation</title>
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="style/style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
@@ -13,10 +12,124 @@
 
 <body>
 
-<h1>Fuel Price in Australia</h1>
+<h1>Impact of Fuel Prices and Transport Relief on Public Transport Usage in Australia</h1>
 
-<div id="fuel_map"></div>
-<div id="fuel_bar"></div>
+<!-- ================= SECTION 1 ================= -->
+<section class="section">
+  <h2>Section 1: The Fuel Shock</h2>
+
+  <div class="card">
+    <h3>Vis 1 — Fuel Price Map</h3>
+    <div id="fuel_map"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 2 — Fuel Price Cycle Patterns</h3>
+    <p>
+      Australian cities show very different fuel pricing cycles.
+      WA is highly predictable with short cycles, while eastern states
+      experience longer and more volatile pricing patterns.
+    </p>
+    <div id="fuelCycleHeatmap"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 3 — Transport Affordability Distribution (Melbourne vs Geelong)</h3>
+
+    <p>
+      This faceted density plot compares how transport affordability
+      is distributed over time between Melbourne and Geelong.
+      Melbourne consistently shows higher transport cost pressure as a
+      percentage of income, while Geelong remains lower but gradually converges upward.
+      Fuel share contributes a stable but significant portion of total transport costs.
+    </p>
+
+    <div id="fuelCompareFacetplot"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 4 — Most Expensive States (Ranked)</h3>
+
+    <p>
+      The graph below displays a comparison of the fuel prices for various states in Australia by utilizing the combination of the layered histogram and the cumulative histogram. This particular representation helps the audience to recognize that there are two factors to be considered: the number of states in a certain price category and the accumulation of states with increasing prices. It is worth emphasizing that fuel prices are not equally distributed in all regions; therefore, fuel prices group into certain bands due to their geographical location and policies implemented in them.
+    </p>
+    
+    <div id="fuel_ranked_bar"></div>
+  </div>
+</section>
+
+
+<!-- ================= SECTION 2 ================= -->
+<section class="section">
+  <h2>Section 2: Government Response</h2>
+
+  <div class="card">
+    <h3>Vis 5 — Policy Timeline</h3>
+    <div id="policy_timeline"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 6 — Policy Coverage Map</h3>
+    <div id="policy_map"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 7 — Policy Spending by State</h3>
+    <div id="policy_bar"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 8 — Policy Intensity (Faceted)</h3>
+    <div id="policy_trellis"></div>
+  </div>
+</section>
+
+
+<!-- ================= SECTION 3 ================= -->
+<section class="section">
+  <h2>Section 3: Public Transport Recovery</h2>
+
+  <div class="card">
+    <h3>Vis 9 — Multi-Line Transport Usage</h3>
+    <div id="pt_multiline"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 10 — Stacked Area Transport Composition</h3>
+    <div id="pt_area"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 11 — Ridership Growth Snapshot</h3>
+    <div id="pt_slope"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 12 — Mode Share Bubble Chart</h3>
+    <div id="pt_bubble"></div>
+  </div>
+</section>
+
+
+<!-- ================= SECTION 4 ================= -->
+<section class="section">
+  <h2>Section 4: Behaviour Change</h2>
+
+  <div class="card">
+    <h3>Vis 13 — Fuel Price vs Train Ridership</h3>
+    <div id="connected_scatter"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 14 — Transport Mode Shift (Before vs After)</h3>
+    <div id="stacked_compare"></div>
+  </div>
+
+  <div class="card">
+    <h3>Vis 15 — Annotated Summary Insight</h3>
+    <div id="summary_chart"></div>
+  </div>
+</section>
 
 <script src="script.js"></script>
 

@@ -6,15 +6,16 @@
   "title": "Average Petrol Price by State (c/L)",
 
   "data": {
-    "url": "data/states.json",
-    "format": {
-      "type": "json"
-    }
+  "url": "data/states.json",
+  "format": {
+    "type": "json",
+    "property": "features"
+  }
   },
 
   "transform": [
     {
-      "lookup": "STATE_NAME",
+      "lookup": "properties.STATE_NAME",
       "from": {
         "data": {
           "url": "data/fuel_prices_state.csv"
@@ -43,7 +44,7 @@
       }
     },
     "tooltip": [
-      { "field": "STATE_NAME", "type": "nominal", "title": "State" },
+      { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
       { "field": "Price", "type": "quantitative" }
     ]
   }

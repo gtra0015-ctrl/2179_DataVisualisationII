@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "Fuel Price Distribution Across States (Overlayed Histogram + Cumulative)",
+
+  "data": {
+    "url": "data/fuel_prices_state.csv",
+    "format": { "type": "csv" }
+  },
+
+  "transform": [
+    {
+      "bin": true,
+      "field": "Price",
+      "as": ["bin_Price", "bin_Price_end"]
+    },
+    {
+      "aggregate": [{ "op": "count", "as": "count" }],
+      "groupby": ["State", "bin_Price", "bin_Price_end"]
+    },
+    {
+      "sort": [{ "field": "bin_Price" }],
+      "window": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "cumulative_count"
+        }
+      ],
+      "frame": [null, 0],
+      "groupby": ["State"]
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": { "type": "bar", "opacity": 0.35 },
+      "encoding": {
+        "x": {
+          "field": "bin_Price",
+          "type": "quantitative",
+          "bin": "binned",
+          "title": "Fuel Price"
+        },
+        "x2": { "field": "bin_Price_end" },
+
+        "y": {
+          "field": "count",
+          "type": "quantitative",
+          "title": "Frequency"
+        },
+
+        "color": {
+          "field": "State",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "mark": { "type": "line", "strokeWidth": 2 },
+      "encoding": {
+        "x": {
+          "field": "bin_Price",
+          "type": "quantitative",
+          "bin": "binned"
+        },
+        "y": {
+          "field": "cumulative_count",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}

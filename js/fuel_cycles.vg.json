@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "data": {
+    "url": "data/fuel_cycles.csv"
+  },
+
+  "spacing": 15,
+  "bounds": "flush",
+
+  "vconcat": [
+    {
+      "mark": "bar",
+      "height": 60,
+
+      "encoding": {
+        "x": {
+          "bin": true,
+          "field": "DaysToPeak",
+          "type": "quantitative",
+          "axis": null
+        },
+
+        "y": {
+          "aggregate": "count",
+          "title": "Frequency"
+        }
+      }
+    },
+
+    {
+      "spacing": 15,
+
+      "hconcat": [
+        {
+          "mark": "rect",
+
+          "encoding": {
+            "x": {
+              "bin": true,
+              "field": "DaysToPeak",
+              "type": "quantitative",
+              "title": "Days to Peak"
+            },
+
+            "y": {
+              "bin": true,
+              "field": "CycleLength",
+              "type": "quantitative",
+              "title": "Cycle Length"
+            },
+
+            "color": {
+              "aggregate": "count",
+              "title": "Number of Cycles"
+            }
+          }
+        },
+
+        {
+          "mark": "bar",
+          "width": 60,
+
+          "encoding": {
+            "y": {
+              "bin": true,
+              "field": "CycleLength",
+              "type": "quantitative",
+              "axis": null
+            },
+
+            "x": {
+              "aggregate": "count",
+              "title": "Frequency"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

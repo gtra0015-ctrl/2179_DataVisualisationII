@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "Transport Affordability & Fuel Cost Share Over Time",
+  "data": {
+    "url": "data/transport_affordability.csv",
+    "format": {
+      "type": "csv",
+      "parse": { "Year": "number" }
+    }
+  },
+  "transform": [
+    {
+      "lookup": "Year",
+      "from": {
+        "data": {
+          "url": "data/fuel_share_melbourne.csv",
+          "format": {
+            "type": "csv",
+            "parse": { "Year": "number" }
+          }
+        },
+        "key": "Year",
+        "fields": ["FuelPctOfTransportCost"]
+      }
+    }
+  ],
+  "facet": {
+    "field": "City",
+    "type": "nominal"
+  },
+  "spec": {
+    "width": 380,
+    "height": 140,
+    "layer": [
+      {
+        "mark": "area",
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          "y": {
+            "field": "TransportCostPctIncome",
+            "type": "quantitative",
+            "title": "% of Income"
+          },
+          "color": { "value": "#3b82f6" },
+          "opacity": { "value": 0.35 }
+        }
+      },
+      {
+        "mark": "line",
+        "encoding": {
+          "x": { "field": "Year", "type": "ordinal" },
+          "y": {
+            "field": "TransportCostPctIncome",
+            "type": "quantitative"
+          },
+          "color": { "value": "#1d4ed8" }
+        }
+      },
+      {
+        "mark": "line",
+        "encoding": {
+          "x": { "field": "Year", "type": "ordinal" },
+          "y": {
+            "field": "FuelPctOfTransportCost",
+            "type": "quantitative"
+          },
+          "color": { "value": "#ef4444" }
+        }
+      }
+    ]
+  }
+}
