@@ -4,12 +4,12 @@
   "width": 700,
   "height": 500,
 
-  "title": "Average Fuel Price by State (c/L)",
+  "title": "Average Petrol Price by State (cents per litre)",
 
   "data": {
     "url": "data/states.geojson",
     "format": {
-      "type": "json"
+      "type": "geojson"
     }
   },
 
@@ -18,10 +18,7 @@
       "lookup": "properties.STATE_NAME",
       "from": {
         "data": {
-          "url": "data/fuel_prices_state.csv",
-          "format": {
-            "type": "csv"
-          }
+          "url": "data/fuel_prices_state.csv"
         },
         "key": "State",
         "fields": ["Price"]
@@ -46,10 +43,15 @@
         "scheme": "reds"
       }
     },
-
     "tooltip": [
-      { "field": "properties.STATE_NAME", "title": "State" },
-      { "field": "Price", "title": "Fuel Price (c/L)" }
+      {
+        "field": "properties.STATE_NAME",
+        "title": "State"
+      },
+      {
+        "field": "Price",
+        "title": "Price (c/L)"
+      }
     ]
   }
 }
