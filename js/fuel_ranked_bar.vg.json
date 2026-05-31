@@ -1,78 +1,53 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "title": "Fuel Price Distribution Across States (Overlayed Histogram + Cumulative)",
-
+  "title": {
+    "text": "Fuel Prices Across Australian States — Ranked",
+    "subtitle": "Sorted highest to lowest. NT stands alone 15% above the next highest state.",
+    "subtitleColor": "#8a8f9e", "subtitleFontSize": 12,
+    "fontSize": 14, "anchor": "start", "color": "#0f1117"
+  },
+  "width": 300,
+  "height": 200,
   "data": {
     "url": "data/fuel_prices_state.csv",
-    "format": { "type": "csv" }
+    "format": { "type": "csv", "parse": { "Price": "number" } }
   },
-
-  "transform": [
-    {
-      "bin": true,
-      "field": "Price",
-      "as": ["bin_Price", "bin_Price_end"]
-    },
-    {
-      "aggregate": [{ "op": "count", "as": "count" }],
-      "groupby": ["State", "bin_Price", "bin_Price_end"]
-    },
-    {
-      "sort": [{ "field": "bin_Price" }],
-      "window": [
-        {
-          "op": "sum",
-          "field": "count",
-          "as": "cumulative_count"
-        }
-      ],
-      "frame": [null, 0],
-      "groupby": ["State"]
-    }
-  ],
-
   "layer": [
     {
-      "mark": { "type": "bar", "opacity": 0.35 },
+      "mark": { "type": "bar", "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3 },
       "encoding": {
         "x": {
-          "field": "bin_Price",
-          "type": "quantitative",
-          "bin": "binned",
-          "title": "Fuel Price"
+          "field": "State", "type": "nominal",
+          "sort": { "field": "Price", "order": "descending" },
+          "axis": { "labelAngle": 0, "title": "State / Territory", "labelFontSize": 11 }
         },
-        "x2": { "field": "bin_Price_end" },
-
         "y": {
-          "field": "count",
-          "type": "quantitative",
-          "title": "Frequency"
+          "field": "Price", "type": "quantitative",
+          "title": "Fuel Price (c/L)",
+          "scale": { "domain": [175, 215] },
+          "axis": { "labelFontSize": 10, "titleFontSize": 11 }
         },
-
         "color": {
-          "field": "State",
-          "type": "nominal"
-        }
+          "field": "Price", "type": "quantitative",
+          "scale": { "scheme": "reds", "domain": [178, 215] },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "State", "title": "State" },
+          { "field": "Price", "title": "Price (c/L)", "format": ".1f" }
+        ]
       }
     },
-
     {
-      "mark": { "type": "line", "strokeWidth": 2 },
+      "mark": { "type": "rule", "color": "#8a8f9e", "strokeDash": [4, 3], "strokeWidth": 1.5 },
       "encoding": {
-        "x": {
-          "field": "bin_Price",
-          "type": "quantitative",
-          "bin": "binned"
-        },
-        "y": {
-          "field": "cumulative_count",
-          "type": "quantitative"
-        },
-        "color": {
-          "field": "State",
-          "type": "nominal"
-        }
+        "y": { "aggregate": "mean", "field": "Price", "type": "quantitative" }
       }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "dx": 4, "dy": -60, "fontSize": 10, "color": "#8a8f9e", "fontStyle": "italic" },
+      "encoding": { "text": { "value": "← avg" } }
     }
-  ]
+  ],
+  "config": { "view": { "stroke": null }, "axis": { "grid": false } }
 }

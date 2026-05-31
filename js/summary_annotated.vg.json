@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Fuel Price & Train Ridership with Policy Annotations (2025)",
+    "subtitle": "Red = fuel price (c/L)  ·  Blue = metro train ridership  ·  Amber lines mark key policy events",
+    "subtitleColor": "#8a8f9e", "subtitleFontSize": 12,
+    "fontSize": 14, "anchor": "start", "color": "#0f1117"
+  },
+  "width": 700,
+  "height": 380,
+  "data": { "url": "data/summary_fuel_ridership_policy.csv" },
+  "resolve": { "scale": { "y": "independent" } },
+  "layer": [
+    {
+      "mark": { "type": "area", "color": "#c0392b", "opacity": 0.08, "interpolate": "monotone" },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "y": { "field": "FuelPrice", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "line", "color": "#c0392b", "strokeWidth": 2.5, "interpolate": "monotone" },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+          "title": "Month (2025)",
+          "axis": { "labelFontSize": 12, "titleFontSize": 12 }
+        },
+        "y": {
+          "field": "FuelPrice", "type": "quantitative",
+          "title": "Fuel Price (c/L)",
+          "axis": { "titleColor": "#c0392b", "labelColor": "#c0392b", "labelFontSize": 11, "titleFontSize": 12 }
+        }
+      }
+    },
+    {
+      "mark": { "type": "point", "color": "#c0392b", "filled": true, "size": 50 },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "y": { "field": "FuelPrice", "type": "quantitative" },
+        "tooltip": [
+          { "field": "Month", "title": "Month" },
+          { "field": "FuelPrice", "title": "Fuel Price (c/L)" },
+          { "field": "TrainRidership", "title": "Ridership", "format": ",.0f" },
+          { "field": "Event", "title": "Event" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "line", "color": "#1a56a0", "strokeWidth": 2.5, "interpolate": "monotone" },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "y": {
+          "field": "TrainRidership", "type": "quantitative",
+          "title": "Metro Train Ridership",
+          "axis": { "format": "~s", "titleColor": "#1a56a0", "labelColor": "#1a56a0", "labelFontSize": 11, "titleFontSize": 12 }
+        }
+      }
+    },
+    {
+      "mark": { "type": "point", "color": "#1a56a0", "filled": true, "size": 50 },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "y": { "field": "TrainRidership", "type": "quantitative" },
+        "tooltip": [
+          { "field": "Month", "title": "Month" },
+          { "field": "FuelPrice", "title": "Fuel Price (c/L)" },
+          { "field": "TrainRidership", "title": "Ridership", "format": ",.0f" },
+          { "field": "Event", "title": "Event" }
+        ]
+      }
+    },
+    {
+      "transform": [ { "filter": "datum.Event !== null && datum.Event !== ''" } ],
+      "mark": { "type": "rule", "color": "#c47d00", "strokeDash": [4, 3], "strokeWidth": 1.5 },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        }
+      }
+    },
+    {
+      "transform": [ { "filter": "datum.Event !== null && datum.Event !== ''" } ],
+      "mark": { "type": "text", "align": "left", "angle": 270, "dx": 110, "dy": -6, "fontSize": 11, "fontWeight": "600", "color": "#c47d00" },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "text": { "field": "Event" }
+      }
+    }
+  ],
+  "config": { "view": { "stroke": null }, "axis": { "gridColor": "#e8e5df" } }
+}

@@ -1,181 +1,310 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>DV2 Transport Visualisation</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel, Policy & Transport — Australian Data Story</title>
   <link rel="stylesheet" href="style/style.css">
-
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
-
 <body>
 
-<h1>Impact of Fuel Prices and Transport Relief on Public Transport Usage in Australia</h1>
+<!-- ══════════════ MASTHEAD ══════════════ -->
+<header class="masthead">
+  <div class="masthead-label">Data Visualisation II · FIT2179</div>
+  <h1>How Rising Fuel Prices Reshaped<br>Australian Transport Behaviour</h1>
+  <div class="masthead-meta">
+    <span><strong>Domain</strong> Transport Economics &amp; Policy</span>
+    <span><strong>Geography</strong> Australia (focus: Victoria)</span>
+    <span><strong>Period</strong> 2019 – 2026</span>
+    <span><strong>Sources</strong> ACCC, PTV, ABS, State Government Reports</span>
+  </div>
+</header>
 
-<!-- ================= SECTION 1 ================= -->
-<section class="section">
-  <h2>Section 1: The Fuel Shock</h2>
+<nav class="toc">
+  <a href="#s1">1. The Fuel Shock</a>
+  <a href="#s2">2. Government Response</a>
+  <a href="#s3">3. Transport Recovery</a>
+  <a href="#s4">4. Behaviour Change</a>
+</nav>
 
-  <div class="card">
-    <h3>Vis 1 — Fuel Price Map</h3>
-    <div id="fuel_map"></div>
+<!-- ══════════════ SECTION 1 ══════════════ -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div>
+      <div class="section-title">The Fuel Shock</div>
+      <p class="section-deck">Since 2022, Australia faced consistent fuel price pressures. Price levels were highly variable among different states, there was increasing volatility of cycle patterns in eastern cities, and transport prices made up a greater proportion of people’s income.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Vis 2 — Fuel Price Cycle Patterns</h3>
-    <p>
-      Australian cities show very different fuel pricing cycles.
-      WA is highly predictable with short cycles, while eastern states
-      experience longer and more volatile pricing patterns.
-    </p>
-    <div id="fuelCycleHeatmap"></div>
-  </div>
+  <div class="vis-grid">
 
-  <div class="card">
-    <h3>Vis 3 — Transport Affordability Distribution (Melbourne vs Geelong)</h3>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 1 · Choropleth Map</div>
+        <h3>Fuel Price Across Australian States</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight">Northern Territory tops the list of the most expensive prices for petrol at 212.9 c/L, which is greater than 15% than that of the second most expensive state (QLD, 187.5 c/L). This is because of remoteness and high transportation cost. The cheapest state is SA with price at 180.4 c/L</p>
+        <div class="vis-container"><div id="fuel_map"></div></div>
+        <div class="callout-grid">
+          <div class="callout"><span class="callout-num">212.9</span><span class="callout-label">NT — highest (c/L)</span></div>
+          <div class="callout"><span class="callout-num">180.4</span><span class="callout-label">SA — lowest (c/L)</span></div>
+          <div class="callout"><span class="callout-num">15%</span><span class="callout-label">NT premium over average</span></div>
+          <div class="callout"><span class="callout-num">7</span><span class="callout-label">States &amp; Territories compared</span></div>
+        </div>
+      </div>
+    </div>
 
-    <p>
-      This faceted density plot compares how transport affordability
-      is distributed over time between Melbourne and Geelong.
-      Melbourne consistently shows higher transport cost pressure as a
-      percentage of income, while Geelong remains lower but gradually converges upward.
-      Fuel share contributes a stable but significant portion of total transport costs.
-    </p>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 2 · Heatmap + Marginal Histograms</div>
+        <h3>Fuel Price Cycle Patterns by City</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight">Perth has a highly compressed cycle of seven days, which is very predictable and strictly controlled. Cities in the east, such as Melbourne, Sydney, and Brisbane, have cycles of 33-41 days, which means that consumers must wait much longer before knowing whether the prices will go up or down.</p>
+        <div class="vis-container"><div id="fuelCycleHeatmap"></div></div>
+      </div>
+    </div>
 
-    <div id="fuelCompareFacetplot"></div>
-  </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 3 · Faceted Area + Line Chart</div>
+        <h3>Transport Affordability &amp; Fuel Cost Share Over Time</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight blue">The cost of transport in Melbourne increased by 17% to 17.9% of its income between 2019 and 2023 while that for Geelong followed a similar pattern although on a lower level. The red dashed line representing the share of fuel in the total cost of transport remains almost constant at 16-21%.</p>
+        <div class="vis-container"><div id="fuelCompareFacetplot"></div></div>
+      </div>
+    </div>
 
-  <div class="card">
-    <h3>Vis 4 — Most Expensive States (Ranked)</h3>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 4 · Annotated Bar Chart</div>
+        <h3>State-by-State Fuel Price Ranking</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight amber">It is evident that countries are very tightly grouped together in the range 183–188 c/L, indicating that national supply characteristics take precedence over state-related features; however, the exception to this is NT, as it diverges distinctly from this cluster of countries.</p>
+        <div class="vis-container"><div id="fuel_ranked_bar"></div></div>
+      </div>
+    </div>
 
-    <p>
-      The graph below displays a comparison of the fuel prices for various states in Australia by utilizing the combination of the layered histogram and the cumulative histogram. This particular representation helps the audience to recognize that there are two factors to be considered: the number of states in a certain price category and the accumulation of states with increasing prices. It is worth emphasizing that fuel prices are not equally distributed in all regions; therefore, fuel prices group into certain bands due to their geographical location and policies implemented in them.
-    </p>
-
-    <div id="fuel_ranked_bar"></div>
-  </div>
-</section>
-
-
-<!-- ================= SECTION 2 ================= -->
-<section class="section">
-  <h2>Section 2: Government Response</h2>
-
-  <div class="card">
-    <h3>Vis 5 — Policy Timeline</h3>
-
-    <p>
-      The above visualization depicts the increasing pressures faced by the people of Australia due to rising costs of living associated with fuel and the government's policy approach to this problem. Early responses involved surveillance of the fuel supply and transparency of prices; more recent steps have seen the introduction of price control mechanisms, like daily ceilings on fuel prices. Policy makers in Victoria moved their attention to transport issues in 2026 by providing subsidies for public transport.
-    </p>
-
-    <div id="policy_timeline"></div>
-  </div>
-
-  <div class="card">
-    <h3>Vis 6 — Policy Coverage Map</h3>
-    <p>
-      This map highlights the spatial distribution of governmental response to the fuel price volatility in Victoria, as well as illustrating the national-level shock events that affect the whole country.
-    </p>
-
-    <u>
-      <li>Victoria exhibits heavy government intervention (price cap, transparency, public transport assistance)</li>
-      <li>External shocks include national events (fuel volatility, cost of living)</li>
-      <li>Size of circle reflects level of policy implementation; escalation is observed in 2025-2026</li>
-    </u>
-
-    <div id="policy_map"></div>
-  </div>
-
-  <div class="card">
-    <h3>Vis 7 — Policy Spending by State</h3>
-
-    <p>
-      The grouped bar graph facilitates the comparison of expenditure on different policies among different states without compromising on the categorization aspect of each type of expenditure. Through the grouped bar chart, it becomes possible to compare not only differences among different states but also differences within states.
-    </p>
-
-    <div id="policy_bar"></div>
-  </div>
-
-  <div class="card">
-    <h3>Vis 8 — Policy Intensity (Faceted)</h3>
-
-    <p>
-      Based on the results from the faceted visualization, there is evidence indicating that there was a variation in the actions taken by the Australian government to address issues related to affordable fuel. Some states like Victoria and Queensland used more aggressive approaches compared to other states, which used less severe and mainly monitoring approaches. The variations indicate the level of priority placed in dealing with fuel prices depending on economic, transportation, and living-cost factors.
-    </p>
-
-    <div id="policy_trellis"></div>
   </div>
 </section>
 
-
-<!-- ================= SECTION 3 ================= -->
-<section class="section">
-  <h2>Section 3: Public Transport Recovery</h2>
-
-  <div class="card">
-    <h3>Vis 9 — Multi-Line Transport Usage</h3>
-
-    <p>
-      There was notable recovery of usage in the public transport sector for the entire year of 2025, with the metro trains leading in terms of passenger numbers. Usage of trams and metro buses was also notable, whereas regional services were less prominent. As can be seen from the graph below, public transport played a major role in Victoria's transportation network, especially after times of volatile fuel costs.
-    </p>
-
-    <div id="pt_multiline"></div>
+<!-- ══════════════ SECTION 2 ══════════════ -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div>
+      <div class="section-title">Government Response</div>
+      <p class="section-deck">State and federal governments rolled out a range of measures such as fuel management, price controls, tax cuts, and even free or subsidized transport services. Victoria, in particular, implemented the strongest policy, which led to experiments with free public transport in 2026.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Vis 10 — Stacked Area Transport Composition</h3>
-    
-    <p>
-      The composition of Victoria's public transport network remained relatively stable throughout 2025. Metropolitan train services consistently represented the largest share of passengers, while trams and buses formed the second-largest transport modes. Regional services contributed a smaller proportion of overall trips but maintained steady usage throughout the year.
-    </p>
+  <div class="vis-grid">
 
-  <div id="pt_area"></div>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 5 · Annotated Scatter Timeline</div>
+        <h3>Policy &amp; Shock Events: 2022 – 2026</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight">The escalation of policies is obvious here: Victoria went from passive monitoring (2023) to active price regulation (2025) and free public transport (2026). The cost-of-living crisis of 2022 and the international oil price fluctuations are evident in the graph as blue circles, which indicate that government policies were reactive rather than proactive.</p>
+        <div class="vis-container"><div id="policy_timeline"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 6 · Proportional Symbol Map</div>
+        <h3>Geographic Distribution of Policy Interventions</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight blue">The state of Victoria dominates the number of policy events; its capital cities ensure that transport policy is both urgent and solvable. The impact of national external events on policy is illustrated by Australia's central point geographically. There were no interventions recorded in TAS or NSW in this time period.</p>
+        <div class="vis-container"><div id="policy_map"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 7 · Grouped Bar Chart</div>
+        <h3>Policy Spending by State &amp; Program Classification</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight amber">The Queensland “50 cent for public transport program” classified as being “Partly” dedicated for transport relief was funded at a cost of $1 billion, which was substantially more than all other programs in the states. The federal government, on the other hand, spent its $195 million on totally dedicated programs.</p>
+        <div class="vis-container"><div id="policy_bar"></div></div>
+        <div class="callout-grid">
+          <div class="callout"><span class="callout-num">$1B</span><span class="callout-label">QLD 50c fares program</span></div>
+          <div class="callout"><span class="callout-num">$290M</span><span class="callout-label">WA FuelWatch investment</span></div>
+          <div class="callout"><span class="callout-num">$195M</span><span class="callout-label">Federal fuel programs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 8 · Multi-Line Chart</div>
+        <h3>Policy Intensity Over Time by State</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight green">The most intense policy score (5/5) is retained by Victoria and Queensland up to 2025–2026. The Federal Government achieved a peak of 5 in 2022, after which it fell due to a reduction in the fuel excise. The state of Western Australia scores 4 consistently owing to the FuelWatch initiative.</p>
+        <div class="vis-container"><div id="policy_trellis"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 3 ══════════════ -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <div>
+      <div class="section-title">Public Transport Recovery</div>
+      <p class="section-deck">Victoria’s transport system bounced back tremendously during 2025. Metro rail and tram systems spearheaded this revival, with peak periods being recorded in March and May, implying the possible resumption of commuting by the general population due to rising costs in privately owned automobiles.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Vis 11 — Ridership Growth Snapshot</h3>
+  <div class="vis-grid">
 
-    <p>
-      Passenger volumes increased substantially after the beginning of 2025, particularly for metropolitan train and tram services. Most transport modes maintained higher passenger numbers throughout the year compared with January levels, suggesting continued recovery and sustained demand for public transport.
-    </p>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 9 · Multi-Line Chart</div>
+        <h3>Monthly Patronage by Transport Mode (2025)</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight">Metro Train led the way with a peak number of 17-18 million rides in March and May. Tram service matched train performance closely. Bus service was consistently trailing train and tram service. The drop off in June-July is understandable because it coincides with holiday time.</p>
+        <div class="vis-container"><div id="pt_multiline"></div></div>
+      </div>
+    </div>
 
-    <div id="pt_slope"></div>
-  </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 10 · Stacked Area Chart</div>
+        <h3>Transport Composition — Stacked Monthly View</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight blue">The stacked area graph demonstrates the domination of metropolitan services. Metro Train and Tram make up around 65% of total monthly trips. Regional services make up a very slim base. The patronage of the entire network is more than 45 million monthly trips.</p>
+        <div class="vis-container"><div id="pt_area"></div></div>
+      </div>
+    </div>
 
-  <div class="card">
-    <h3>Vis 12 — Mode Share Bubble Chart</h3>
-    <p>
-    Metropolitan train services carried substantially more passengers than any other transport mode during 2025. Tram and metropolitan bus services formed the second largest categories, while regional transport services accounted for a considerably smaller share of total patronage. This highlights the central role of metropolitan rail in Victoria's transport network.
-    </p>
+    <div class="vis-grid two-col">
 
-  <div id="pt_bubble"></div>
+      <div class="card">
+        <div class="card-header">
+          <div class="vis-tag">Vis 11 · Slope / Line Chart</div>
+          <h3>Ridership Snapshot: Key Months</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-insight amber">In comparison with January, March and May demonstrate strong mid-year recovery. All modes apart from Regional Coach display better performance in terms of passengers in March and May compared to January, indicating the effect of increased gasoline prices.</p>
+          <div class="vis-container"><div id="pt_slope"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="vis-tag">Vis 12 · Bubble Chart</div>
+          <h3>Annual Passenger Volume by Mode</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-insight green">Metro Train ferried 185 million passengers in 2025, surpassing the number of passengers carried by Metro Tram (155 million) and Metro Bus (111 million) combined. The mode with the lowest value is Regional Coach (1.4 million). The values have been labeled appropriately.</p>
+          <div class="vis-container"><div id="pt_bubble"></div></div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </section>
 
-
-<!-- ================= SECTION 4 ================= -->
-<section class="section">
-  <h2>Section 4: Behaviour Change</h2>
-
-  <div class="card">
-    <h3>Vis 13 — Fuel Price vs Train Ridership</h3>
-    <div id="connected_scatter"></div>
+<!-- ══════════════ SECTION 4 ══════════════ -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <div>
+      <div class="section-title">Behaviour Change</div>
+      <p class="section-deck">Ultimate query: Did the rising cost of fuel and policy action actually change the travel habits of Australia? In this part, the relationship between the price of fuel and the train usage is analyzed along with the shifting mode share prior to and following policy implementation.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Vis 14 — Transport Mode Shift (Before vs After)</h3>
-    <div id="stacked_compare"></div>
-  </div>
+  <div class="vis-grid">
 
-  <div class="card">
-    <h3>Vis 15 — Annotated Summary Insight</h3>
-    <div id="summary_chart"></div>
+    <div class="card">
+      <div class="card-header">
+        <div class="vis-tag">Vis 13 · Connected Scatter Plot</div>
+        <h3>Fuel Price vs Train Ridership — Monthly Path (2025)</h3>
+      </div>
+      <div class="card-body">
+        <p class="card-insight">These connected scatter plots illustrate the monthly journey in terms of fuel price / ridership. The higher price months of September and October generally coincide with higher ridership levels, which conforms to the substitution effect. March is an outlier in terms of the high level of ridership in relation to moderate prices.</p>
+        <div class="vis-container"><div id="connected_scatter"></div></div>
+        <div class="callout-grid">
+          <div class="callout"><span class="callout-num">+13%</span><span class="callout-label">Jan → Mar ridership growth</span></div>
+          <div class="callout"><span class="callout-num">188 c/L</span><span class="callout-label">Oct — year's peak fuel price</span></div>
+          <div class="callout"><span class="callout-num">18M</span><span class="callout-label">Mar — peak ridership month</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vis-grid two-col">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="vis-tag">Vis 14 · Normalised Stacked Bar</div>
+          <h3>Mode Share: Before vs After Policy</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-insight blue">Car mode share dropped by 9 percentage points to 49%. The share of train increased by 6 percentage points (22% to 28%) while that of tram increased by 2 pp, and bus by 1 percentage point. It’s a significant shift in mode share as a result of the effect of fuel cost rise and subsidized transport.</p>
+          <div class="vis-container"><div id="stacked_compare"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="vis-tag">Vis 15 · Dual-Axis Annotated Chart</div>
+          <h3>Fuel Price, Ridership &amp; Policy Moments — Summary</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-insight amber">This is depicted in the chart where fuel prices (in red) and train ridership (in blue) are presented against time along with marked vertical lines for important events. The introduction of the Fuel Excise Cut in August saw a slight decrease in prices; the Fair Fuel Plan in October saw ridership staying high despite cooler weather.</p>
+          <div class="vis-container"><div id="summary_chart"></div></div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </section>
+
+<!-- ══════════════ METADATA FOOTER ══════════════ -->
+<footer class="metadata">
+  <div class="metadata-grid">
+    <div>
+      <h4>Data Sources</h4>
+      <p>ACCC Petrol Monitoring Report 2025<br>
+      Public Transport Victoria (PTV) Monthly Patronage Data<br>
+      Australian Bureau of Statistics — Household Expenditure Survey<br>
+      State Government Budget Papers (VIC, QLD, WA, NSW, SA, NA, ACT, Federal)</p>
+    </div>
+    <div>
+      <h4>About This Visualisation</h4>
+      <p>Created for FIT2179 Data Visualisation II, Monash University.<br>
+      All data relates to Australian domestic transport and fuel markets.<br>
+      Dollar values in AUD. Fuel prices in cents per litre (c/L).<br>
+      Patronage figures are unadjusted monthly totals.</p>
+    </div>
+    <div>
+      <h4>Author &amp; Date</h4>
+      <p>Student submission, Semester 1 2026.<br>
+      Visualisations built with <a href="https://vega.github.io/vega-lite/" target="_blank">Vega-Lite 6</a>.<br>
+      Typography: DM Serif Display &amp; DM Sans (Google Fonts).</p>
+    </div>
+  </div>
+</footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>

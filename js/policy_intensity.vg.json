@@ -1,55 +1,48 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-
-  "title": "Policy Intensity Across Australian States",
-
-  "width": 700,
-  "height": 400,
-
+  "title": {
+    "text": "Policy Intensity Over Time by State",
+    "subtitle": "VIC and QLD escalate most aggressively; Federal response peaks in 2022 then eases",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
+  },
+  "width": 680,
+  "height": 360,
   "data": {
     "url": "data/policy_intensity.csv",
-    "format": {
-      "type": "csv",
-      "parse": {
-        "Year": "number",
-        "ImpactLevel": "number"
-      }
-    }
+    "format": { "type": "csv", "parse": { "Year": "number", "ImpactLevel": "number" } }
   },
-
-  "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
-  },
-
+  "mark": { "type": "line", "point": { "filled": true, "size": 70 }, "strokeWidth": 2.5, "interpolate": "monotone" },
   "encoding": {
     "x": {
       "field": "Year",
       "type": "ordinal",
-      "title": "Year"
+      "title": "Year",
+      "axis": { "labelFontSize": 12, "titleFontSize": 12 }
     },
-
     "y": {
       "field": "ImpactLevel",
       "type": "quantitative",
-      "title": "Policy Intensity",
-      "scale": {
-        "domain": [0, 5]
-      }
+      "title": "Policy Intensity Score",
+      "scale": { "domain": [0, 6] },
+      "axis": { "tickCount": 5, "labelFontSize": 11, "titleFontSize": 12 }
     },
-
     "color": {
       "field": "State",
       "type": "nominal",
-      "title": "State"
+      "title": "State",
+      "scale": { "scheme": "tableau10" },
+      "legend": { "orient": "right", "labelFontSize": 11, "titleFontSize": 11 }
     },
-
     "tooltip": [
-      {"field": "State"},
-      {"field": "PolicyType"},
-      {"field": "Year"},
-      {"field": "ImpactLevel"}
+      { "field": "State", "title": "State" },
+      { "field": "Year", "title": "Year" },
+      { "field": "PolicyType", "title": "Policy" },
+      { "field": "ImpactLevel", "title": "Intensity" }
     ]
-  }
+  },
+  "config": { "view": { "stroke": null }, "axis": { "gridColor": "#e8e5df" } }
 }

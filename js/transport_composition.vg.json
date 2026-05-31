@@ -1,34 +1,45 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-
-  "title": "Monthly Public Transport Composition",
-
-  "data": {
-    "url": "data/transport_patronage_long.csv"
+  "title": {
+    "text": "Stacked Monthly Transport Composition (2025)",
+    "subtitle": "Metro Train & Tram dominate throughout; regional services form a steady base layer",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
   },
-
-  "mark": "area",
-
+  "width": 680,
+  "height": 360,
+  "data": { "url": "data/transport_patronage_long.csv" },
+  "mark": { "type": "area", "interpolate": "monotone" },
   "encoding": {
     "x": {
       "field": "Month",
       "type": "ordinal",
-      "sort": [
-        "January","February","March","April",
-        "May","June","July","August",
-        "September","October","November","December"
-      ]
+      "sort": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "title": "Month",
+      "axis": { "labelAngle": -30, "labelFontSize": 11, "titleFontSize": 12 }
     },
-
     "y": {
       "field": "Passengers",
       "type": "quantitative",
-      "stack": "zero"
+      "stack": "zero",
+      "title": "Total Passengers",
+      "axis": { "format": "~s", "labelFontSize": 11, "titleFontSize": 12 }
     },
-
     "color": {
       "field": "Mode",
-      "type": "nominal"
-    }
-  }
+      "type": "nominal",
+      "title": "Transport Mode",
+      "scale": { "scheme": "tableau10" },
+      "legend": { "orient": "top", "columns": 3, "labelFontSize": 11, "titleFontSize": 11 }
+    },
+    "tooltip": [
+      { "field": "Month", "title": "Month" },
+      { "field": "Mode", "title": "Mode" },
+      { "field": "Passengers", "title": "Passengers", "format": ",.0f" }
+    ]
+  },
+  "config": { "view": { "stroke": null } }
 }

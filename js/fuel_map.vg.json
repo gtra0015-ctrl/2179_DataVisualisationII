@@ -1,51 +1,54 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
-  "width": 700,
-  "height": 500,
-  "title": "Average Petrol Price by State (c/L)",
-
-  "data": {
-  "url": "data/states.json",
-  "format": {
-    "type": "json",
-    "property": "features"
-  }
+  "width": 680,
+  "height": 480,
+  "title": {
+    "text": "Average Petrol Price by State (c/L)",
+    "subtitle": "NA records the highest price at 212.9 c/L — 15% above the national average",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "font": "DM Sans",
+    "anchor": "start",
+    "color": "#0f1117"
   },
-
+  "data": {
+    "url": "data/states.json",
+    "format": { "type": "json", "property": "features" }
+  },
   "transform": [
     {
       "lookup": "properties.STATE_NAME",
       "from": {
-        "data": {
-          "url": "data/fuel_prices_state.csv"
-        },
+        "data": { "url": "data/fuel_prices_state.csv" },
         "key": "State",
         "fields": ["Price"]
       }
     }
   ],
-
-  "projection": {
-    "type": "mercator"
-  },
-
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white"
-  },
-
-  "encoding": {
-    "color": {
-      "field": "Price",
-      "type": "quantitative",
-      "scale": {
-        "scheme": "reds"
+  "projection": { "type": "mercator" },
+  "layer": [
+    {
+      "mark": { "type": "geoshape", "stroke": "white", "strokeWidth": 1.5 },
+      "encoding": {
+        "color": {
+          "field": "Price",
+          "type": "quantitative",
+          "scale": { "scheme": "reds", "domain": [178, 215] },
+          "legend": {
+            "title": "Price (c/L)",
+            "orient": "bottom-right",
+            "gradientLength": 120,
+            "labelFontSize": 11,
+            "titleFontSize": 11
+          }
+        },
+        "tooltip": [
+          { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
+          { "field": "Price", "type": "quantitative", "title": "Price (c/L)", "format": ".1f" }
+        ]
       }
-    },
-    "tooltip": [
-      { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
-      { "field": "Price", "type": "quantitative" }
-    ]
-  }
+    }
+  ],
+  "config": { "view": { "stroke": null } }
 }

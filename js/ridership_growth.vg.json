@@ -1,75 +1,49 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-
-  "title": "Ridership Growth Across Major Transport Modes",
-
-  "width": 750,
-  "height": 400,
-
-  "data": {
-    "url": "data/vic_transport_patronage.csv"
+  "title": {
+    "text": "Ridership Snapshot: Key Months in 2025",
+    "subtitle": "Jan → Mar → May → Oct reveals strong mid-year recovery across all modes",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
   },
-
+  "width": 680,
+  "height": 360,
+  "data": { "url": "data/transport_patronage_long.csv" },
   "transform": [
-  {
-    "filter": {
-      "field": "Month",
-      "oneOf": [
-        "January",
-        "March",
-        "May",
-        "October"
-      ]
+    {
+      "filter": { "field": "Month", "oneOf": ["January","March","May","October"] }
     }
-  }
-],
-
-  "mark": {
-    "type": "line",
-    "point": {
-      "filled": true,
-      "size": 80
-    },
-    "strokeWidth": 3
-  },
-
+  ],
+  "mark": { "type": "line", "point": { "filled": true, "size": 80 }, "strokeWidth": 2.5 },
   "encoding": {
     "x": {
       "field": "Month",
       "type": "ordinal",
-      "sort": [
-        "January",
-        "March",
-        "May",
-        "October"
-      ]
+      "sort": ["January","March","May","October"],
+      "title": "Month",
+      "axis": { "labelFontSize": 12, "titleFontSize": 12 }
     },
-
     "y": {
       "field": "Passengers",
       "type": "quantitative",
-      "title": "Passengers"
+      "title": "Passengers",
+      "axis": { "format": "~s", "labelFontSize": 11, "titleFontSize": 12 }
     },
-
     "color": {
       "field": "Mode",
       "type": "nominal",
-      "title": "Transport Mode"
+      "title": "Transport Mode",
+      "scale": { "scheme": "tableau10" },
+      "legend": { "orient": "right", "labelFontSize": 11, "titleFontSize": 11 }
     },
-
     "tooltip": [
-      {"field": "Mode"},
-      {"field": "Month"},
-      {
-        "field": "Passengers",
-        "format": ","
-      }
+      { "field": "Mode", "title": "Mode" },
+      { "field": "Month", "title": "Month" },
+      { "field": "Passengers", "title": "Passengers", "format": ",.0f" }
     ]
   },
-
-  "config": {
-    "view": {
-      "stroke": null
-    }
-  }
+  "config": { "view": { "stroke": null }, "axis": { "gridColor": "#e8e5df" } }
 }

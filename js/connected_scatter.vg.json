@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Fuel Price & Train Ridership Month by Month (2025)",
+    "subtitle": "Red bars = fuel price (c/L, left axis)  ·  Blue line = train ridership (right axis)",
+    "subtitleColor": "#8a8f9e", "subtitleFontSize": 12,
+    "fontSize": 14, "anchor": "start", "color": "#0f1117"
+  },
+  "width": 640,
+  "height": 340,
+  "data": { "url": "data/fuel_vs_ridership.csv" },
+  "resolve": { "scale": { "y": "independent" } },
+  "layer": [
+    {
+      "mark": { "type": "bar", "color": "#c0392b", "opacity": 0.75, "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3 },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+          "title": "Month 2025",
+          "axis": { "labelFontSize": 12, "titleFontSize": 12 }
+        },
+        "y": {
+          "field": "FuelPrice", "type": "quantitative",
+          "title": "Fuel Price (c/L)",
+          "scale": { "domain": [170, 195] },
+          "axis": { "titleColor": "#c0392b", "labelColor": "#c0392b", "labelFontSize": 11, "titleFontSize": 12, "grid": false }
+        },
+        "tooltip": [
+          { "field": "Month", "title": "Month" },
+          { "field": "FuelPrice", "title": "Fuel Price (c/L)" },
+          { "field": "TrainRidership", "title": "Ridership", "format": ",.0f" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "line", "color": "#1a56a0", "strokeWidth": 2.5, "interpolate": "monotone", "point": { "filled": true, "size": 60 } },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal",
+          "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        "y": {
+          "field": "TrainRidership", "type": "quantitative",
+          "title": "Metro Train Ridership",
+          "axis": { "format": "~s", "titleColor": "#1a56a0", "labelColor": "#1a56a0", "labelFontSize": 11, "titleFontSize": 12 }
+        },
+        "tooltip": [
+          { "field": "Month", "title": "Month" },
+          { "field": "FuelPrice", "title": "Fuel Price (c/L)" },
+          { "field": "TrainRidership", "title": "Ridership", "format": ",.0f" }
+        ]
+      }
+    }
+  ],
+  "config": { "view": { "stroke": null }, "axis": { "gridColor": "#e8e5df" } }
+}

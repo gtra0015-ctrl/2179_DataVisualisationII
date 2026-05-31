@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Transport Mode Share: Before vs After Fuel Relief Policy",
+    "subtitle": "Car mode share fell 9 percentage points; Train gained 6 pp — a measurable behaviour shift",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
+  },
+  "width": 340,
+  "height": 380,
+  "data": { "url": "data/transport_mode_share_before_after.csv" },
+  "mark": { "type": "bar" },
+  "encoding": {
+    "x": {
+      "field": "Period",
+      "type": "nominal",
+      "title": "Policy Period",
+      "sort": ["Before", "After"],
+      "axis": { "labelFontSize": 13, "titleFontSize": 12 }
+    },
+    "y": {
+      "field": "Percent",
+      "type": "quantitative",
+      "stack": "normalize",
+      "title": "Mode Share",
+      "axis": { "format": ".0%", "labelFontSize": 11, "titleFontSize": 12 }
+    },
+    "color": {
+      "field": "Mode",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Car", "Train", "Tram", "Bus"],
+        "range": ["#c0392b", "#1a56a0", "#1a7a4a", "#c47d00"]
+      },
+      "legend": { "orient": "right", "labelFontSize": 11, "titleFontSize": 11 }
+    },
+    "tooltip": [
+      { "field": "Period", "title": "Period" },
+      { "field": "Mode", "title": "Mode" },
+      { "field": "Percent", "title": "Share (%)" }
+    ]
+  },
+  "config": { "view": { "stroke": null } }
+}

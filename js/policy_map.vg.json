@@ -1,105 +1,75 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "title": "Policy Coverage Map — Fuel & Transport Events Across Australia",
-
-  "width": 700,
-  "height": 500,
-
-  "projection": {
-    "type": "mercator",
-    "center": [133, -25],
-    "scale": 900
+  "title": {
+    "text": "Geographic Distribution of Policy Interventions",
+    "subtitle": "Victoria leads with five distinct interventions; national shocks centred on Australia's geographic midpoint",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
   },
-
+  "width": 700,
+  "height": 480,
+  "projection": { "type": "mercator", "center": [133, -27], "scale": 860 },
   "layer": [
     {
       "data": {
         "url": "data/states.json",
-        "format": {
-          "type": "json",
-          "property": "features"
-        }
+        "format": { "type": "json", "property": "features" }
       },
-      "mark": {
-        "type": "geoshape",
-        "fill": "#f1f5f9",
-        "stroke": "#94a3b8",
-        "strokeWidth": 1
-      }
+      "mark": { "type": "geoshape", "fill": "#eef2f7", "stroke": "#94a3b8", "strokeWidth": 1 }
     },
-
     {
       "data": {
         "url": "data/state_policy.csv",
-        "format": {
-          "type": "csv",
-          "parse": {
-            "lon": "number",
-            "lat": "number",
-            "ImpactLevel": "number"
-          }
-        }
+        "format": { "type": "csv", "parse": { "lon": "number", "lat": "number", "ImpactLevel": "number" } }
       },
-      "mark": {
-        "type": "circle",
-        "opacity": 0.9,
-        "stroke": "white",
-        "strokeWidth": 1
-      },
+      "mark": { "type": "circle", "opacity": 0.82, "stroke": "white", "strokeWidth": 1.5 },
       "encoding": {
         "longitude": { "field": "lon", "type": "quantitative" },
         "latitude": { "field": "lat", "type": "quantitative" },
-
         "size": {
           "field": "ImpactLevel",
           "type": "quantitative",
-          "scale": { "range": [80, 900] },
-          "legend": { "title": "Impact Level" }
+          "scale": { "range": [100, 1100] },
+          "legend": { "title": "Impact Level", "orient": "bottom-right", "labelFontSize": 10, "titleFontSize": 10 }
         },
-
         "color": {
-          "field": "Event",
+          "field": "Type",
           "type": "nominal",
-          "scale": { "scheme": "tableau20" },
-          "legend": { "title": "Policy Event" }
+          "scale": { "domain": ["Policy", "External Shock"], "range": ["#c0392b", "#1a56a0"] },
+          "legend": { "title": "Event Type", "orient": "top-left", "labelFontSize": 11, "titleFontSize": 11 }
         },
-
         "tooltip": [
-          { "field": "Event", "type": "nominal" },
-          { "field": "State", "type": "nominal" },
-          { "field": "Type", "type": "nominal" },
-          { "field": "ImpactLevel", "type": "quantitative" },
-          { "field": "Date", "type": "temporal" }
+          { "field": "Event", "type": "nominal", "title": "Event" },
+          { "field": "State", "type": "nominal", "title": "State" },
+          { "field": "Type", "type": "nominal", "title": "Type" },
+          { "field": "ImpactLevel", "type": "quantitative", "title": "Impact" },
+          { "field": "Date", "type": "temporal", "title": "Date", "format": "%b %Y" }
         ]
       }
     },
-
     {
       "data": {
         "values": [
-          { "State": "WA", "lon": 122, "lat": -25 },
-          { "State": "NA", "lon": 133, "lat": -19 },
-          { "State": "SA", "lon": 135, "lat": -30 },
-          { "State": "QLD", "lon": 145, "lat": -21 },
+          { "State": "WA",  "lon": 121, "lat": -26 },
+          { "State": "NA",  "lon": 133, "lat": -19 },
+          { "State": "SA",  "lon": 135, "lat": -30 },
+          { "State": "QLD", "lon": 145, "lat": -22 },
           { "State": "NSW", "lon": 147, "lat": -33 },
-          { "State": "VIC", "lon": 144.9, "lat": -37.8 },
+          { "State": "VIC", "lon": 144.5, "lat": -37.5 },
           { "State": "TAS", "lon": 147, "lat": -42 },
-          { "State": "ACT", "lon": 149.1, "lat": -35.3 }
+          { "State": "ACT", "lon": 149, "lat": -35.3 }
         ]
       },
-
-      "mark": {
-        "type": "text",
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "color": "#111827"
-      },
-
+      "mark": { "type": "text", "fontSize": 11, "fontWeight": "600", "color": "#3d4250" },
       "encoding": {
         "longitude": { "field": "lon", "type": "quantitative" },
         "latitude": { "field": "lat", "type": "quantitative" },
         "text": { "field": "State" }
       }
     }
-  ]
+  ],
+  "config": { "view": { "stroke": null } }
 }

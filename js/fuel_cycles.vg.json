@@ -1,81 +1,67 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-
-  "data": {
-    "url": "data/fuel_cycles.csv"
+  "title": {
+    "text": "Fuel Price Cycle Patterns by City",
+    "subtitle": "Perth cycles weekly; eastern cities take 4–6 weeks — shaping when consumers fill up",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
   },
-
-  "spacing": 15,
+  "data": { "url": "data/fuel_cycles.csv" },
+  "spacing": 12,
   "bounds": "flush",
-
   "vconcat": [
     {
-      "mark": "bar",
-      "height": 60,
-
+      "mark": { "type": "bar", "color": "#1a56a0", "opacity": 0.7 },
+      "height": 55,
+      "width": 520,
       "encoding": {
-        "x": {
-          "bin": true,
-          "field": "DaysToPeak",
-          "type": "quantitative",
-          "axis": null
-        },
-
-        "y": {
-          "aggregate": "count",
-          "title": "Frequency"
-        }
+        "x": { "bin": true, "field": "DaysToPeak", "type": "quantitative", "axis": null },
+        "y": { "aggregate": "count", "title": "Count", "axis": { "labelFontSize": 10, "titleFontSize": 10 } },
+        "tooltip": [
+          { "field": "DaysToPeak", "bin": true, "title": "Days to Peak" },
+          { "aggregate": "count", "title": "Count" }
+        ]
       }
     },
-
     {
-      "spacing": 15,
-
+      "spacing": 12,
       "hconcat": [
         {
+          "width": 520,
           "mark": "rect",
-
           "encoding": {
-            "x": {
-              "bin": true,
-              "field": "DaysToPeak",
-              "type": "quantitative",
-              "title": "Days to Peak"
-            },
-
-            "y": {
-              "bin": true,
-              "field": "CycleLength",
-              "type": "quantitative",
-              "title": "Cycle Length"
-            },
-
+            "x": { "bin": true, "field": "DaysToPeak", "type": "quantitative", "title": "Days to Peak" },
+            "y": { "bin": true, "field": "CycleLength", "type": "quantitative", "title": "Cycle Length (days)" },
             "color": {
               "aggregate": "count",
-              "title": "Number of Cycles"
-            }
+              "title": "No. of Cycles",
+              "scale": { "scheme": "blues" },
+              "legend": { "labelFontSize": 10, "titleFontSize": 10 }
+            },
+            "tooltip": [
+              { "field": "DaysToPeak", "bin": true, "title": "Days to Peak" },
+              { "field": "CycleLength", "bin": true, "title": "Cycle Length" },
+              { "aggregate": "count", "title": "Cycles" }
+            ]
           }
         },
-
         {
-          "mark": "bar",
-          "width": 60,
-
+          "mark": { "type": "bar", "color": "#1a56a0", "opacity": 0.7 },
+          "width": 55,
           "encoding": {
-            "y": {
-              "bin": true,
-              "field": "CycleLength",
-              "type": "quantitative",
-              "axis": null
-            },
-
-            "x": {
-              "aggregate": "count",
-              "title": "Frequency"
-            }
+            "y": { "bin": true, "field": "CycleLength", "type": "quantitative", "axis": null },
+            "x": { "aggregate": "count", "title": "Count", "axis": { "labelFontSize": 10, "titleFontSize": 10 } },
+            "tooltip": [
+              { "field": "CycleLength", "bin": true, "title": "Cycle Length" },
+              { "aggregate": "count", "title": "Count" }
+            ]
           }
         }
       ]
     }
-  ]
+  ],
+  "config": { "view": { "stroke": null }, "axis": { "labelFontSize": 11, "titleFontSize": 12 } }
 }

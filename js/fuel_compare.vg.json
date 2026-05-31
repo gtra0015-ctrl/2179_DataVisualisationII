@@ -1,12 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "title": "Transport Affordability & Fuel Cost Share Over Time",
+  "title": {
+    "text": "Transport Affordability & Fuel Cost Share by City",
+    "subtitle": "Blue area = transport as % of income  ·  Red line = fuel's share of transport costs",
+    "subtitleColor": "#8a8f9e",
+    "subtitleFontSize": 12,
+    "fontSize": 14,
+    "anchor": "start",
+    "color": "#0f1117"
+  },
   "data": {
     "url": "data/transport_affordability.csv",
-    "format": {
-      "type": "csv",
-      "parse": { "Year": "number" }
-    }
+    "format": { "type": "csv", "parse": { "Year": "number" } }
   },
   "transform": [
     {
@@ -14,63 +19,58 @@
       "from": {
         "data": {
           "url": "data/fuel_share_melbourne.csv",
-          "format": {
-            "type": "csv",
-            "parse": { "Year": "number" }
-          }
+          "format": { "type": "csv", "parse": { "Year": "number" } }
         },
         "key": "Year",
         "fields": ["FuelPctOfTransportCost"]
       }
     }
   ],
-  "facet": {
-    "field": "City",
-    "type": "nominal"
-  },
+  "facet": { "field": "City", "type": "nominal", "title": null },
   "spec": {
     "width": 380,
-    "height": 140,
+    "height": 130,
     "layer": [
       {
-        "mark": "area",
+        "mark": { "type": "area", "interpolate": "monotone" },
         "encoding": {
-          "x": {
-            "field": "Year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          "y": {
-            "field": "TransportCostPctIncome",
-            "type": "quantitative",
-            "title": "% of Income"
-          },
-          "color": { "value": "#3b82f6" },
-          "opacity": { "value": 0.35 }
+          "x": { "field": "Year", "type": "ordinal", "title": "Year" },
+          "y": { "field": "TransportCostPctIncome", "type": "quantitative", "title": "% of Income" },
+          "color": { "value": "#1a56a0" },
+          "opacity": { "value": 0.2 }
         }
       },
       {
-        "mark": "line",
+        "mark": { "type": "line", "strokeWidth": 2, "interpolate": "monotone" },
         "encoding": {
           "x": { "field": "Year", "type": "ordinal" },
-          "y": {
-            "field": "TransportCostPctIncome",
-            "type": "quantitative"
-          },
-          "color": { "value": "#1d4ed8" }
+          "y": { "field": "TransportCostPctIncome", "type": "quantitative" },
+          "color": { "value": "#1a56a0" }
         }
       },
       {
-        "mark": "line",
+        "mark": { "type": "line", "strokeWidth": 2, "strokeDash": [4,3], "interpolate": "monotone" },
         "encoding": {
           "x": { "field": "Year", "type": "ordinal" },
-          "y": {
-            "field": "FuelPctOfTransportCost",
-            "type": "quantitative"
-          },
-          "color": { "value": "#ef4444" }
+          "y": { "field": "FuelPctOfTransportCost", "type": "quantitative" },
+          "color": { "value": "#c0392b" }
+        }
+      },
+      {
+        "mark": { "type": "point", "filled": true, "size": 50 },
+        "encoding": {
+          "x": { "field": "Year", "type": "ordinal" },
+          "y": { "field": "TransportCostPctIncome", "type": "quantitative" },
+          "color": { "value": "#1a56a0" },
+          "tooltip": [
+            { "field": "City" },
+            { "field": "Year" },
+            { "field": "TransportCostPctIncome", "title": "Transport % Income", "format": ".1f" },
+            { "field": "FuelPctOfTransportCost", "title": "Fuel % Transport", "format": ".1f" }
+          ]
         }
       }
     ]
-  }
+  },
+  "config": { "view": { "stroke": null }, "axis": { "labelFontSize": 11 }, "facet": { "spacing": 20 } }
 }
