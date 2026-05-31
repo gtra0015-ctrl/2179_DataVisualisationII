@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+
+  "width": 700,
+  "height": 500,
+
+  "title": "Average Fuel Price by State (c/L)",
+
+  "data": {
+    "url": "data/states.geojson",
+    "format": {
+      "type": "json"
+    }
+  },
+
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "url": "data/fuel_prices_state.csv",
+          "format": {
+            "type": "csv"
+          }
+        },
+        "key": "State",
+        "fields": ["Price"]
+      }
+    }
+  ],
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white"
+  },
+
+  "encoding": {
+    "color": {
+      "field": "Price",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "reds"
+      }
+    },
+
+    "tooltip": [
+      { "field": "properties.STATE_NAME", "title": "State" },
+      { "field": "Price", "title": "Fuel Price (c/L)" }
+    ]
+  }
+}
