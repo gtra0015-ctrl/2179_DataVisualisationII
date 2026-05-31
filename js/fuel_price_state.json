@@ -1,0 +1,10 @@
+[
+  { "State": "New South Wales", "Price": 186.4 },
+  { "State": "Australian Capital Territory", "Price": 186.4 },
+  { "State": "Victoria", "Price": 185.7 },
+  { "State": "Queensland", "Price": 187.5 },
+  { "State": "South Australia", "Price": 180.4 },
+  { "State": "Western Australia", "Price": 183.2 },
+  { "State": "Northern Territory", "Price": 212.9 },
+  { "State": "Tasmania", "Price": 187.5 }
+]

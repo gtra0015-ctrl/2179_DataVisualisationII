@@ -1,4 +1,6 @@
-vegaEmbed("#fuel_map", "js/fuel_map.vg.json");
+document.addEventListener("DOMContentLoaded", function () {
+  vegaEmbed("#fuel_map", "js/fuel_map.vg.json");
+});
 // vegaEmbed("#fuel_line", "js/fuel_line.vg.json");
 
 // vegaEmbed("#policy_bar", "js/policy_bar.vg.json");

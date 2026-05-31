@@ -7,24 +7,22 @@
   "title": "Average Petrol Price by State (cents per litre)",
 
   "data": {
-    "url": "data/states.geojson",
+    "url": "map/australian-states.json",
     "format": {
-      "type": "geojson"
+      "type": "json"
     }
   },
 
   "transform": [
-    {
-      "lookup": "properties.STATE_NAME",
-      "from": {
+  {
+    "lookup": "properties.STATE_NAME",
+    "from": {
         "data": {
-          "url": "data/fuel_prices_state.csv"
-        },
-        "key": "State",
-        "fields": ["Price"]
-      }
+            "url": "js/fuel_price_state.json"
+        }
     }
-  ],
+  }
+],
 
   "projection": {
     "type": "mercator"
